@@ -53,7 +53,74 @@
       <div class="banner"></div>
         </div>
     </div>
-    <!-- this is for login -->
+  <!--this is for login-->  
+ <?php
+ @include 'databaseconn.php';
+ if (isset($_SESSION["email"])){
+  header("location: welcome.php");
+ }
+ if(isset($_POST["login"])){
+   if($_SERVER["REQUEST_METHOD"] == "SUBMIT"){
+    $err = [];
+   if (empty($_POST["email"])) {
+    $emailErr = "Email is required";
+   } else {
+    $email = test_value($_POST["email"]);
+    // check if e-mail address is well-formed
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $emailErr = "Invalid email format";
+    }
+  }
+  if(empty($_POST["pass"])){
+  $passErr = "Password required";
+  }
+  else{
+  $pass = test_value($_POST["pass"]);
+  }
+ 
+}else{
+   $email = mysqli_real_escape_string($connection, $_POST["email"]);
+   $pass = mysqli_real_escape_string($connection, $_POST["pass"]);
+   $pass = md5($pass);
+   
+   $query = "select * from users where email ='$email' and password = '$pass' ";
+   
+   $result = mysqli_query($connection, $query);
+   if( mysqli_num_rows($result) == 1){
+       #fetch user records using fetch
+   $user = mysqli_fetch_array($result);
+   session_start();
+   #storing data into session
+   $_SESSION["email"] = $email;
+   #check remember
+   if(isset($_POST["remember"])){
+   //setcookie to store cookie value
+   setcookie('email', $email, time()+(60*60*7));
+   }
+   //redirect to defined page
+   header('location: user_dashboard.php');
+  }
+  else{
+  echo "<span class=error><h3>INVALID E-MAIL OR PASSWORD</h3></span>";
+  }
+   }
+ }
+function test_value($data){
+     $data = htmlspecialchars($data);
+    $data = stripslashes($data);
+    $data = trim($data);
+    return $data;
+   }
+ ?>
+<?php if (isset($_GET['msg']) && $_GET['msg'] == 1) {
+		echo '<span class=error>Please login to continue to dashboard<br></span>';
+	} 
+
+	if (isset($_GET['msg']) && $_GET['msg'] == 2) {
+		echo "<span class=error>Logout successful</span>";
+	} ?>
+ <!-- this is for login -->
+ 
     <div class="container">
       <div class="forms" >
           <div class="form1 login">
@@ -61,9 +128,16 @@
               <div class="cancel-login-signup" onclick="close_cross()">
                 <i class="bi bi-x-lg"></i>
               </div>
-              <form action="#">
+              <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                <?php
+      if(isset($err)){
+         foreach($err as $err){
+            echo '<span class="error">' . $err . '</span>';
+         };
+      };?>
                   <div class="input-field email">
-                      <input type="text" placeholder="Enter your email">
+                      <input type="text" placeholder="Enter your email"  name="email" >
+  
                       <i class="bi bi-envelope-fill icon1"></i>
                   </div>
                   <br>
@@ -71,22 +145,28 @@
 
                   <div class="input-field password">
                       <input type="password"
-                      id="password" name="id_password" placeholder="password">
+                      id="password" name="pass" placeholder="password">
+ 
                       <i class="bi bi-lock-fill icon1"></i>
                   </div>
                   <br>
                   <span class="error" style="color: red;"  id="err_psd"></span>
+                  <br>
+                  <select name="user_type">
+                  <option value="user">user</option>
+                  <option value="admin">admin</option>
+                  </select>
                       
                   <div class="checkbox-text">
                       <div class="checkbox-content">
-                          <input type="checkbox" id="logCheck">
-                          <label for="logCheck" class="text">Remember me</label>
+                          <input type="checkbox" id="logCheck" name="remember">
+                          <label for="logCheck" class="text" name="remember">Remember me</label>
                       </div>
                       <a href="#" class="text">Forgot password?</a>
                   </div>
 
                   <div class="input-field button">
-                      <input type="submit" value="Login Now">
+                      <input type="submit" value="Login Now" name="login">
                   </div>
               </form>
 
@@ -96,30 +176,67 @@
                   </span>
               </div>
           </div>
+          
+<?php
+@include 'databaseconn.php';
 
+if(isset($_POST['register'])){
+
+   $name = mysqli_real_escape_string($connection, $_POST['name']);
+   $email = mysqli_real_escape_string($connection, $_POST['email']);
+   $pass = md5($_POST['pass']);
+   $repass = md5($_POST['repass']);
+
+   $select = " SELECT * FROM users WHERE email = '$email' && password = '$pass' ";
+
+   $result = mysqli_query($connection, $select);
+
+   if(mysqli_num_rows($result) > 0){
+
+      $err[] = 'user already exist!';
+
+   }else{
+
+      if($pass != $repass){
+         $err[] = 'password not matched!';
+      }else{
+         $insert = "INSERT INTO users(name, email, password, user_type) VALUES('$name','$email','$pass','$user_type')";
+         mysqli_query($connection, $insert);
+         header('location:index.php');
+      }
+   }
+
+};
+?>
           <!----------------- Registration Form---------- -->
           <div class="form1 signup">
               <span class="title">Registration</span>
               <div class="cancel-login-signup" onclick="close_cross()">
                 <i class="bi bi-x-lg"></i>
               </div>
-              <form action="#" id="formreg" >
+              <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="formreg" method="post" >
+               <?php
+      if(isset($err)){
+         foreach($err as $err){
+            echo '<span class="error">' . $err . '</span>';
+         };
+      };?>
                   <div class="input-field username">
-                      <input type="text" placeholder="Enter your name">
+                      <input type="text" placeholder="Enter your name" name="name" >
                       <i class="bi bi-person-fill"></i>
                   </div>
                   <br>
                   <span class="error" style="color: red;" id="err_username"></span>
 
                   <div class="input-field email">
-                      <input type="text" placeholder="Enter your email">
+                      <input type="text" placeholder="Enter your email" name="email">
                       <i class="bi bi-envelope-fill icon1"></i>
                   </div>
                   <br>
                   <span class="error" style="color: red;" id="err_emaill"></span>
 
                   <div class="input-field password">
-                    <input type="password" name="id_password" 
+                    <input type="password" name="pass" 
                     id="password" placeholder="password">
                       <i class="bi bi-lock-fill icon1"></i>
                   </div>
@@ -128,7 +245,7 @@
                       
                   <div class="input-field repassword">
                     <input type="password"
-                    id="repassword" name="id_password" placeholder="Confirm password">
+                    id="repassword" name="repass" placeholder="Confirm password">
                       <i class="bi bi-lock-fill icon1"></i>
                   </div>
                   <br>
@@ -136,7 +253,7 @@
 
                   <div class="checkbox-text">
                       <div class="checkbox-content">
-                          <input type="checkbox" id="sigCheck">
+                          <input type="checkbox" name="remember" id="sigCheck">
                           <label for="sigCheck" class="text">Remember me</label>
                       </div>
                       
@@ -144,7 +261,7 @@
                   </div>
 
                   <div class="input-field button">
-                      <input type="submit" value="Login Now">
+                      <input type="submit" value="Login Now" name="register">
                   </div>
               </form>
 
@@ -155,7 +272,7 @@
               </div>
           </div>
       </div>
-  </div>
+  </div>  
 
       <!---------this is for Reserve Now rect -------------->
     <div class="explore-row">
@@ -189,20 +306,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 if(empty($_POST["dest"])){
 $destErr = "Enter your destination.";
 }else{
-$dest = test_value($_POST["dest"]);
+$dest = test_input($_POST["dest"]);
 }
 if(empty($_POST["guest"])){
 $guestErr = "guest cannot be empty";
 }else{
-$guest = test_value($_POST["guest"]);
+$guest = test_input($_POST["guest"]);
 }
 if(empty($_POST["check"])){
 $checkErr = "please enter date";
 }else{
-$check = test_value($_POST["check"]);
+$check = test_input($_POST["check"]);
 }
 }
-function test_value($data) {
+function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
   $data = htmlspecialchars($data);
@@ -437,7 +554,7 @@ function test_value($data) {
                    <p class="img_title">Explore kathmandu</p>
                    <p>Kathmandu is a beautiful city and capital city of Nepal</p>
                    <p>
-                     <button class="img_button" onclick="morerooms()" >Explore More</button>
+                     <button class="img_button"><a href="rooms.php">Explore More</a></button>
                     </p>
                </div>
             </div>
@@ -451,7 +568,7 @@ function test_value($data) {
                   <p class="img_title">Explore Lalitpur</p>
                   <p>Kathmandu is a beautiful city and capital city of Nepal</p>
                   <p>
-                    <button class="img_button"  onclick="morerooms()" >Explore More</button>
+                    <button class="img_button"><a href="rooms.php">Explore More</a></button>	
                   </p>
               </div>
            </div>
@@ -465,7 +582,7 @@ function test_value($data) {
                   <p class="img_title">Explore Bhaktapur</p>
                   <p>Kathmandu is a beautiful city and capital city of Nepal</p>
                   <p>
-                    <button class="img_button"  onclick="morerooms()" >Explore More</button>
+                    <button class="img_button"><a href="rooms.php">Explore More</a></button>
                   </p>
               </div>
            </div>
@@ -483,55 +600,7 @@ function test_value($data) {
  </div>
     </div>
 
-    <!--This is for footer-->
-    <div class="footer" id="contact">
-  <footer>
-    <div class="footer-left">
-      <label class="logo">
-        <i class="bi bi-house-fill"></i>
-        </i>GuideAL</i>
-      </label>
-      <p class="footer-links">
-        <a href="">Home</a> |
-        <a href="">Blog</a> |
-        <a href="">About</a> |
-        <a href="">Contact</a>
-      </p>
-      <p class="footer-company-name">
-        &copy; 2022 <span>GuideAL</span> Accomodation pvt. Ltd.
-      </p>
-    </div>
-    <div class="footer-center">
-      <div>
-        <i class="bi bi-geo-alt-fill"></i>
-          <p><span>Patan Multiple Campus, </span>
-          Patan Dhoka, Lalitpur, Nepal</p>
-      </div>
-      <div>
-        <i class="bi bi-telephone-fill"></i>
-        <p>+977 9844588930</p>
-      </div>
-      <div>
-        <i class="bi bi-envelope-fill"></i>
-        <p><a href="mailto:#">support@GuideAL.com</a></p>
-      </div>
-    </div>
-    <div class="footer-right">
-      <p class="footer-company-about">
-        <span>About the company</span>
-        We offer Rooms for Rooms seeks and provide online platforms for Room owners to go online.</p>
-      <div class="footer-icons">
-        <a href="#"><i class="bi bi-facebook"></i></a>
-        <a href="#"><i class="bi bi-twitter"></i></a>
-        <a href="#"><i class="bi bi-instagram"></i></a>
-        <a href="#"><i class="bi bi-linkedin"></i></a>
-        <a href="#"><i class="bi bi-youtube"></i></a>
-        <a href="#"><i class="bi bi-github"></i></a>
-      </div>
-    </div>
-  </div>
-  </footer>
-    </div>
+  <?php include_once('footer.php');?>
    <script type="text/Javascript" src="project.js"></script>
 </body>
 </html>

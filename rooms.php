@@ -13,11 +13,11 @@
     <div class="page-wrapper">
       <section id="header">
           <!-- logo -->
-          <h1><a href="frontpage.html"><i class="bi bi-house"></i>GuideAL</a></a></h1>
+          <h1><a href="index.php"><i class="bi bi-house"></i>GuideAL</a></a></h1>
           <!-- nav -->
           <nav id="nav">
             <ul>
-                <li><a href="frontpage.html" class="active"><span>Home</span></a></li>
+                <li><a href="index.php" class="active"><span>Home</span></a></li>
                 <li><a href="#"><span>Kathmandu</span></a></li>
                 <li><a href="#"><span>Bhaktapur</span></a></li>
                 <li><a href="#"><span>Lalitpur</span></a></li>
@@ -241,5 +241,6 @@
            </div>
        </section>
     </div>
+     <?php include_once('footer.php');?>
 </body>
 </html>

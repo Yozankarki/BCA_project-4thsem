@@ -184,8 +184,4 @@ if(btnhide.style.display === 'none') {
     btnhide.style.display = 'none';
 }
 };
-// this is for going into next page when clicked
-function morerooms()
-{
-    window.location.assign("rooms.html");
-} 
+
