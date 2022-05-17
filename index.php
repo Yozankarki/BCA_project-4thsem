@@ -53,11 +53,12 @@
       <div class="banner"></div>
         </div>
     </div>
+    
   <!--this is for login-->  
  <?php
- @include 'databaseconn.php';
+ @include 'include/databaseconn.php';
  if (isset($_SESSION["email"])){
-  header("location: welcome.php");
+  header("location: user_dashboard.php");
  }
  if(isset($_POST["login"])){
    if($_SERVER["REQUEST_METHOD"] == "SUBMIT"){
@@ -101,7 +102,7 @@
    header('location: user_dashboard.php');
   }
   else{
-  echo "<span class=error><h3>INVALID E-MAIL OR PASSWORD</h3></span>";
+  echo "<script>alert('INVALID E-MAIL OR PASSWORD')</script>";
   }
    }
  }
@@ -113,11 +114,11 @@ function test_value($data){
    }
  ?>
 <?php if (isset($_GET['msg']) && $_GET['msg'] == 1) {
-		echo '<span class=error>Please login to continue to dashboard<br></span>';
+		echo "<script>alert('Please login to continue to dashboard')</script>";
 	} 
 
 	if (isset($_GET['msg']) && $_GET['msg'] == 2) {
-		echo "<span class=error>Logout successful</span>";
+		echo "<script>alert('Logout successful')</script>";
 	} ?>
  <!-- this is for login -->
  
@@ -129,12 +130,7 @@ function test_value($data){
                 <i class="bi bi-x-lg"></i>
               </div>
               <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                <?php
-      if(isset($err)){
-         foreach($err as $err){
-            echo '<span class="error">' . $err . '</span>';
-         };
-      };?>
+              
                   <div class="input-field email">
                       <input type="text" placeholder="Enter your email"  name="email" >
   
@@ -152,10 +148,6 @@ function test_value($data){
                   <br>
                   <span class="error" style="color: red;"  id="err_psd"></span>
                   <br>
-                  <select name="user_type">
-                  <option value="user">user</option>
-                  <option value="admin">admin</option>
-                  </select>
                       
                   <div class="checkbox-text">
                       <div class="checkbox-content">
@@ -178,7 +170,7 @@ function test_value($data){
           </div>
           
 <?php
-@include 'databaseconn.php';
+@include 'include/databaseconn.php';
 
 if(isset($_POST['register'])){
 
@@ -193,21 +185,22 @@ if(isset($_POST['register'])){
 
    if(mysqli_num_rows($result) > 0){
 
-      $err[] = 'user already exist!';
+      $err[] = '<script>alert("user already exist!")</script>';
 
    }else{
 
       if($pass != $repass){
          $err[] = 'password not matched!';
       }else{
-         $insert = "INSERT INTO users(name, email, password, user_type) VALUES('$name','$email','$pass','$user_type')";
+         $insert = "INSERT INTO users(name, email, password, user_type) VALUES('$name','$email','$pass', 'user')";
          mysqli_query($connection, $insert);
-         header('location:index.php');
+         echo "<script>alert('Registration Successful.')</script>";
       }
    }
 
 };
 ?>
+
           <!----------------- Registration Form---------- -->
           <div class="form1 signup">
               <span class="title">Registration</span>
@@ -576,7 +569,9 @@ function test_input($data) {
    
        <div class="image_group">
            <div class="image_card">
-               <img src="photos/bhaktapur.jpg" alt="Bhaktapur" style="width:100%" height="300px">
+               <img src="photos/bhaktapur.jpg" alt="Bhaktapur" style="width:100%" height="
+sign-in
+300px">
                <div class="image_container">
                   <h2>Bhaktapur</h2>
                   <p class="img_title">Explore Bhaktapur</p>
@@ -600,7 +595,7 @@ function test_input($data) {
  </div>
     </div>
 
-  <?php include_once('footer.php');?>
+  <?php include_once('include/footer.php');?>
    <script type="text/Javascript" src="project.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php 
 session_start();
-if (!isset($_SESSION['email'])) {
+if (!isset($_SESSION['email']) == 0) {
 	header('location:index.php?msg=1');
 }
 ?>
