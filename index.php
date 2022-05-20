@@ -192,7 +192,7 @@ if(isset($_POST['register'])){
       if($pass != $repass){
          $err[] = 'password not matched!';
       }else{
-         $insert = "INSERT INTO users(name, email, password, user_type) VALUES('$name','$email','$pass', 'user')";
+         $insert = "INSERT INTO users(name, email, password) VALUES('$name','$email','$pass')";
          mysqli_query($connection, $insert);
          echo "<script>alert('Registration Successful.')</script>";
       }
@@ -569,9 +569,7 @@ function test_input($data) {
    
        <div class="image_group">
            <div class="image_card">
-               <img src="photos/bhaktapur.jpg" alt="Bhaktapur" style="width:100%" height="
-sign-in
-300px">
+               <img src="photos/bhaktapur.jpg" alt="Bhaktapur" style="width:100%" height="300px">
                <div class="image_container">
                   <h2>Bhaktapur</h2>
                   <p class="img_title">Explore Bhaktapur</p>
