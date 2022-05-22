@@ -1,3 +1,4 @@
+<?php require_once 'include/databaseconn.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,135 +70,42 @@
        <section id="main">
            <div class="container">
                <div class="row">
+              
                  <div class="col-2">
                      <!-- Hotel rooms -->
                      <section>
                          <header class="major">
-                             <h2>Rooms near kathmandu</h2>
+                             <h2>Rooms near Your Places.</h2>
                          </header>
+                        
                          <div class="row">
+                         <?php 
+	                        $sql=mysqli_query($connection,"select * from rooms");
+	                        while($row=mysqli_fetch_assoc($sql))
+	                     {?>
                              <div class="col-1">
+                                 
                                  <section class="box">
-                                     <a href="#" class="image featured"><img src="photos/room4.jpg" alt="room4"></a>
+                                     <a href="#" class="image featured"><img src="photos/<?php echo $row['image']; ?>" alt="ROOMS1"></a>
                                      <header>
-                                         <h3>Hotel rooms</h3>
+                                         <h3>[ <?php echo $row['type']; ?>]</h3>
+                                         <h3>Located Near: <?php echo $row['location']; ?></h3>
                                      </header>
-                                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam atque nihil dolorum voluptatum earum odio officia illum consequatur minus perspiciatis distinctio nam nulla quo a, consequuntur perferendis architecto optio facilis!</p>
+                                     <p><?php echo $row['details']; ?></p>
                                      <footer>
                                          <ul class="actions">
-                                             <li><a href="#" class="button">Find out more.</a></li>
+                                             <li><a href="room_details.php?room_id=<?php echo $row['room_id']; ?>" class="button">Find out more.</a></li>
                                          </ul>
                                      </footer>
                                  </section>
                              </div>
-
-                             <div class="col-1">
-                                <section class="box">
-                                    <a href="#" class="image featured"><img src="photos/room4.jpg" alt="room4"></a>
-                                    <header>
-                                        <h3>Hotel rooms</h3>
-                                    </header>
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam atque nihil dolorum voluptatum earum odio officia illum consequatur minus perspiciatis distinctio nam nulla quo a, consequuntur perferendis architecto optio facilis!</p>
-                                    <footer>
-                                        <ul class="actions">
-                                            <li><a href="#" class="button">Find out more.</a></li>
-                                        </ul>
-                                    </footer>
-                                </section>
-                            </div>
-
-                            <div class="col-1">
-                                <section class="box">
-                                    <a href="#" class="image featured"><img src="photos/room4.jpg" alt="room4"></a>
-                                    <header>
-                                        <h3>Hotel rooms</h3>
-                                    </header>
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam atque nihil dolorum voluptatum earum odio officia illum consequatur minus perspiciatis distinctio nam nulla quo a, consequuntur perferendis architecto optio facilis!</p>
-                                    <footer>
-                                        <ul class="actions">
-                                            <li><a href="#" class="button">Find out more.</a></li>
-                                        </ul>
-                                    </footer>
-                                </section>
-                            </div>
-
-                            <div class="col-1">
-                                <section class="box">
-                                    <a href="#" class="image featured"><img src="photos/room4.jpg" alt="room4"></a>
-                                    <header>
-                                        <h3>Hotel rooms</h3>
-                                    </header>
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam atque nihil dolorum voluptatum earum odio officia illum consequatur minus perspiciatis distinctio nam nulla quo a, consequuntur perferendis architecto optio facilis!</p>
-                                    <footer>
-                                        <ul class="actions">
-                                            <li><a href="#" class="button">Find out more.</a></li>
-                                        </ul>
-                                    </footer>
-                                </section>
-                            </div>
-
-                            <div class="col-1">
-                                <section class="box">
-                                    <a href="#" class="image featured"><img src="photos/room4.jpg" alt="room4"></a>
-                                    <header>
-                                        <h3>Hotel rooms</h3>
-                                    </header>
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam atque nihil dolorum voluptatum earum odio officia illum consequatur minus perspiciatis distinctio nam nulla quo a, consequuntur perferendis architecto optio facilis!</p>
-                                    <footer>
-                                        <ul class="actions">
-                                            <li><a href="#" class="button">Find out more.</a></li>
-                                        </ul>
-                                    </footer>
-                                </section>
-                            </div>
-
-                            <div class="col-1">
-                                <section class="box">
-                                    <a href="#" class="image featured"><img src="photos/room4.jpg" alt="room4"></a>
-                                    <header>
-                                        <h3>Hotel rooms</h3>
-                                    </header>
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam atque nihil dolorum voluptatum earum odio officia illum consequatur minus perspiciatis distinctio nam nulla quo a, consequuntur perferendis architecto optio facilis!</p>
-                                    <footer>
-                                        <ul class="actions">
-                                            <li><a href="#" class="button">Find out more.</a></li>
-                                        </ul>
-                                    </footer>
-                                </section>
-                            </div>
-
-                            <div class="col-1">
-                                <section class="box">
-                                    <a href="#" class="image featured"><img src="photos/room4.jpg" alt="room4"></a>
-                                    <header>
-                                        <h3>Hotel rooms</h3>
-                                    </header>
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam atque nihil dolorum voluptatum earum odio officia illum consequatur minus perspiciatis distinctio nam nulla quo a, consequuntur perferendis architecto optio facilis!</p>
-                                    <footer>
-                                        <ul class="actions">
-                                            <li><a href="#" class="button">Find out more.</a></li>
-                                        </ul>
-                                    </footer>
-                                </section>
-                            </div>
-
-                            <div class="col-1">
-                                <section class="box">
-                                    <a href="#" class="image featured"><img src="photos/room4.jpg" alt="room4"></a>
-                                    <header>
-                                        <h3>Hotel rooms</h3>
-                                    </header>
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam atque nihil dolorum voluptatum earum odio officia illum consequatur minus perspiciatis distinctio nam nulla quo a, consequuntur perferendis architecto optio facilis!</p>
-                                    <footer>
-                                        <ul class="actions">
-                                            <li><a href="#" class="button">Find out more.</a></li>
-                                        </ul>
-                                    </footer>
-                                </section>
-                            </div> 
-                         </div>
+                             <?php }?>
+                        </div>
+                        
                      </section>
                  </div>
+                 
+
                  <div class="col-2">
                      <!-- blog -->
                      <section>

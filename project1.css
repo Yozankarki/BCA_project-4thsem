@@ -173,6 +173,7 @@
     transform: translateY(3px);
 }
 
+
 /* this is for login */
 .container{
   position: absolute;
@@ -643,63 +644,7 @@ div.gallery:hover
     cursor: pointer;
 }
 
-/* this is for our rooms */
-/* Center website */
-div.main {
-  max-width: 1200px;
-  margin: auto;
-  display: none;
-}
 
-div.main + h1 {
-  font-size: 50px;
-  word-break: break-all;
-}
-
-.photo-row {
-  margin: 10px -16px;
-}
-/* Add padding BETWEEN each column */
-.photo-row,
-.photo-row > .photo-column {
-  padding: 8px;
-}
-
-/* Create three equal columns that floats next to each other */
-.photo-column {
-  float: left;
-  width: 50%;
-}
-
-/* Clear floats after rows */ 
-.photo-row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Content */
-.img-content {
-  background-color: white;
-  padding: 10px;
-}
-.img-content img
-{
-  width: 100%;
-  height: 300px;
-}
-
-.img-content img:hover
-{
-  cursor: pointer;
-  border: 2px solid white;
-  box-shadow: 0px 10px 16px #000;
-}
-@media screen and (max-width:850px){
-  .photo-column {
-    width: 100%;
-  }
-}
 
 /* This is for Three image */
 .gird-row-4

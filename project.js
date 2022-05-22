@@ -184,4 +184,3 @@ if(btnhide.style.display === 'none') {
     btnhide.style.display = 'none';
 }
 };
-

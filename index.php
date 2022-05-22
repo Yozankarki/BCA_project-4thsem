@@ -119,7 +119,9 @@ function test_value($data){
 
 	if (isset($_GET['msg']) && $_GET['msg'] == 2) {
 		echo "<script>alert('Logout successful')</script>";
-	} ?>
+	}
+  ?>
+
  <!-- this is for login -->
  
     <div class="container">
@@ -441,100 +443,10 @@ function test_input($data) {
     <div class="explore">
         <div class="explore_center">
           <h1>Explore More</h1>
-          <button onclick="hidebtn()">Near Available Rooms</button>
+          <button><a href="rooms.php">Near Available Rooms</a></button>
         </div> 
        </div>
     </div>
-
-    <!-- this is our rooms available -->
-    <div class="main" id="main">
-
-      <h1>Rooms near you</h1>
-      <hr>
-      <h2>Hotel Rooms</h2> 
-      <div class="photo-row">
-
-        <div class="photo-column">
-          <div class="img-content">
-            <img src="photos/two-queen-rooms.jpg" alt="ROOMS1" >
-            <h4>Mountains</h4>
-            <p>Lorem ipsum dolor..</p>
-          </div>
-        </div>
-
-        <div class="photo-column">
-          <div class="img-content">
-          <img src="photos/room2.jpg" alt="ROOMS2" >
-            <h4>Lights</h4>
-            <p>Lorem ipsum dolor..</p>
-          </div>
-        </div>
-
-        <div class="photo-column">
-          <div class="img-content">
-          <img src="photos/room3.jpg" alt="ROOMS3" >
-            <h4>Forest</h4>
-            <p>Lorem ipsum dolor..</p>
-          </div>
-        </div>
-        
-        <div class="photo-column">
-          <div class="img-content">
-            <img src="photos/room4.jpg" alt="ROOMS4">
-            <h4>Retro</h4>
-            <p>Lorem ipsum dolor..</p>
-          </div>
-        </div>
-
-        <div class="photo-column">
-          <div class="img-content">
-          <img src="photos/room5.jpg" alt="ROOMS5" >
-            <h4>Fast</h4>
-            <p>Lorem ipsum dolor..</p>
-          </div>
-        </div>
-
-        <div class="photo-column">
-          <div class="img-content">
-          <img src="photos/room6.jpg" alt="ROOMS6">
-            <h4>Classic</h4>
-            <p>Lorem ipsum dolor..</p>
-          </div>
-        </div>
-      
-        <div class="photo-column">
-          <div class="img-content">
-            <img src="photos/room7.jpg" alt="ROOMS7" >
-            <h4>Girl</h4>
-            <p>Lorem ipsum dolor..</p>
-          </div>
-        </div>
-
-        <div class="photo-column">
-          <div class="img-content">
-          <img src="photos/room8.jpg" alt="ROOMS8">
-            <h4>Man</h4>
-            <p>Lorem ipsum dolor..</p>
-          </div>
-        </div>
-
-        <div class="photo-column">
-          <div class="img-content">
-          <img src="photos/room9.jpg" alt="ROOMS9" >
-            <h4>Woman</h4>
-            <p>Lorem ipsum dolor..</p>
-          </div>
-        </div>
-        
-        <div class="photo-column">
-          <div class="img-content">
-          <img src="photos/top.jpg" alt="ROOMS10" >
-            <h4>Woman</h4>
-            <p>Lorem ipsum dolor..</p>
-          </div>
-        </div>
-      </div>
-      </div>
 
     <!--This is for image container info-->
     <div class="gird-row-4">
