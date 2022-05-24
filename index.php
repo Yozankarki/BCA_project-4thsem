@@ -1,3 +1,7 @@
+<?php
+ session_start();
+ include('include/databaseconn.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,11 +44,22 @@
             <li><a href="#Features">Features</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
-          <div class="signin"  onclick="signclose()">
+          <?php if(isset($_SESSION['email']) != "") {?>
+            <div class="signin">
+            <h3 class="sign-in">
+            <span><?php echo $_SESSION['email'];?></span> </h3>
+              <div id="myDropdown" class="dropdown-content">
+             <a href="profile.php">Booking</a>
+             <a href="logout.php">logout</a>
+          </div> 
+          </div>
+            <?php } else {?>
+              <div class="signin" onclick="signclose()">
             <h3 class="sign-in">
               <i class="bi bi-person-circle"></i><span>sign-in</span>
             </h3>
           </div>
+          <?php };?> 
           <div class="icon menu-btn">
             <i class="bi bi-list"></i>
           </div>
@@ -56,10 +71,6 @@
     
   <!--this is for login-->  
  <?php
- @include 'include/databaseconn.php';
- if (isset($_SESSION["email"])){
-  header("location: user_dashboard.php");
- }
  if(isset($_POST["login"])){
    if($_SERVER["REQUEST_METHOD"] == "SUBMIT"){
     $err = [];
@@ -84,22 +95,21 @@
    $pass = mysqli_real_escape_string($connection, $_POST["pass"]);
    $pass = md5($pass);
    
-   $query = "select * from users where email ='$email' and password = '$pass' ";
+   $query = "select email,password from users where email ='$email' and password = '$pass' ";
    
    $result = mysqli_query($connection, $query);
    if( mysqli_num_rows($result) == 1){
        #fetch user records using fetch
    $user = mysqli_fetch_array($result);
-   session_start();
    #storing data into session
    $_SESSION["email"] = $email;
    #check remember
    if(isset($_POST["remember"])){
    //setcookie to store cookie value
    setcookie('email', $email, time()+(60*60*7));
+   setcookie('name', $name, time()+(60*60*7));
+
    }
-   //redirect to defined page
-   header('location: user_dashboard.php');
   }
   else{
   echo "<script>alert('INVALID E-MAIL OR PASSWORD')</script>";
@@ -114,11 +124,14 @@ function test_value($data){
    }
  ?>
 <?php if (isset($_GET['msg']) && $_GET['msg'] == 1) {
-		echo "<script>alert('Please login to continue to dashboard')</script>";
+		echo "<script>alert('Please login to continue.')</script>";
 	} 
 
 	if (isset($_GET['msg']) && $_GET['msg'] == 2) {
 		echo "<script>alert('Logout successful')</script>";
+	}
+  if (isset($_GET['msg']) && $_GET['msg'] == 3) {
+		echo "<script>alert('booking successful')</script>";
 	}
   ?>
 
@@ -172,7 +185,6 @@ function test_value($data){
           </div>
           
 <?php
-@include 'include/databaseconn.php';
 
 if(isset($_POST['register'])){
 

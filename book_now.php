@@ -1,4 +1,6 @@
-<?php require_once 'include/databaseconn.php';?>
+<?php require_once 'include/databaseconn.php';
+   include 'include/checksession.php';
+?>
 <?php 
    if(is_numeric($_GET['room_id'])){
     $id = $_GET['room_id'];
@@ -105,7 +107,7 @@
       border: 1px solid #ccc;
       border-radius: 3px;
       }
-      input {
+      input, select {
       width: calc(100% - 10px);
       padding: 5px;
       }
@@ -248,45 +250,41 @@
 <body>
 <?php
  if(isset($_POST['submit'])){
- #assign error to array
- $err =[];
- if(isset($_POST['name']) && !empty($_POST['name']) && trim($_POST['name'])){
-     $name = $_POST['name'];
-     if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
-       $err['name'] = "Only letters and white space allowed";
-     }
- }else
- {
-     $err['name'] = "Please enter name";
- }
- if (isset($_POST["email"]) && !empty($_POST['email']) && trim($_POST['email'])) {
-  $email = $_POST['email'];
-  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $err['email'] = "Invalid email format";
-  }
- } else {
-  $err['email'] = "please enter email";
+   $err = [];
+if(isset($_POST['name']) && !empty($_POST['name']) && trim($_POST['name'])){
+  $name = $_POST['name'];
+}else
+{
+  $err['name'] = "Please enter name";
 }
-$room_id = $_GET['room_id'];
-$checkin_date= $_POST['checkindate'];
-$checkout_date= $_POST['checkoutdate'];
-$no_of_rooms= $_POST['room'];
+if(isset($_POST['room']) && !empty($_POST['room']) && trim($_POST['room'])){
+  $no_of_rooms = $_POST['room'];
+}else
+{
+  $err['room'] = "Please enter No of Rooms";
+}
 
- if(count($err) == 0){
-   $sql = "insert into room_booking_details (room_id, checkin_date, checkout_date,	N0_of_rooms ) values( '$room_id', '$checkin_date', '$checkout_date', '$no_of_rooms' ) ";
-   $connection -> query($sql);
-  if($connection -> affected_rows == 1 && $connection -> insert_id > 0) 
-            {  
-                $success = 'Booking successsful.';
-                
-            }
-            else{
-                $error = 'Booking failed!';
-            }
-        }else{
-            $msg = 'Invalid Booking';
-        }
+if(count($err) == 0){
+
+$room_id = $_POST['room_id'];
+$booked_by = $_POST['email'];
+$no_of_rooms = $_POST['room'];	
+$checkout_date = $_POST['checkoutdate'];
+$checkin_date = $_POST['checkindate'];
+
+$select = "select room_id, checkin_date,checkout_date, N0_of_rooms, booked_by,booked_at from room_booking_details where room_id = '$room_id' && checkin_date = '$checkin_date' && checkout_date = '$checkout_date'&& N0_of_rooms = '$no_of_rooms' &&
+booked_by = '$booked_by' ";
+   $result = mysqli_query($connection, $select);
+   if(mysqli_num_rows($result) > 0){
+
+    echo '<script>alert("Booking already done!")</script>';
+ }else{
+  $insert = "insert into room_booking_details (room_id, checkin_date, checkout_date,	N0_of_rooms, booked_by ) values( '$room_id', '$checkin_date', '$checkout_date', '$no_of_rooms', '$booked_by' ) ";
+  $connection -> query($insert);
+  echo "<script>alert('Booking Successful.')</script>";
  }
+}
+}
 ?>
 <div class="testbox">
     <form method="POST" action="">
@@ -295,45 +293,58 @@ $no_of_rooms= $_POST['room'];
       </div>
       <br/>
       <fieldset>
-      <?php if(isset($error)){ ?>
-        <p class="err_msg"><?php echo "<script> alert('". $error . "');</script>";?></p>
-     <?php } ?>
-     <?php if(isset($success)){ ?>
-        <p class="success_msg"><?php echo "<script> alert('". $success . "');</script>";?></p>
-     <?php } ?>
+
         <legend>Reservation Details</legend>
+        
         <div class="columns">
-          <div class="item">
-            <label for="name">Enter Name<span>*</span></label>
-            <input id="fname" type="text" name="name" />
+        <div class="item">
+             
+            <label for="name">Enter Name<span>*
+         <?php if(isset($err['name'])) {?>
+            <?php echo $err['name']; ?>
+         <?php };?>
+            </span></label>
+            <select name="name">
+            <option value="" disabled selected>Select Name</option>
+            <?php 
+               $sql = mysqli_query($connection, "select name from users");
+            while($user = mysqli_fetch_assoc($sql))
+            {?>
+            <option name="name" ><?php echo $user['name'];?></option>
+            <?php }?>
+            </select>
+           
           </div>
+          
           <div class="item">
             <label for="lname">Room type<span>*</span></label>
-            <input id="lname" type="text" name="room_type" value="<?php echo $row['type'];?>"/>
-          </div>
-          <div class="item">
-            <label for="address">Address<span>*</span></label>
-            <input id="address" type="text"   name="address" />
+            <select name="room_type">
+            <option value="1" name="room_type" selected><?php echo $row['type'];?></option>
+            </select>
           </div>
           <div class="item">
             <label for="zip">Price<span>*</span></label>
-            <input id="zip" type="text"   name="price" value="RS: <?php echo $row['price'];?> /- Per Night." required/>
-          </div>
-          <div class="item">
-            <label for="city">City<span>*</span></label>
-            <input id="city" type="text"   name="city" />
+            <select name="price">
+            <option value="1" name="price" selected>RS: <?php echo $row['price'];?> /- Per Night.</option>
+            </select>
           </div>
           <div class="item">
             <label for="state">Room no<span>*</span></label>
-            <input id="state" type="text"   name="room_no" placeholder="<?php echo $row['room_no'];?>" />
+            <select name="room_no">
+            <option value="1" name="room_no" selected><?php echo $row['room_no'];?></option>
+            </select>
           </div>
           <div class="item">
-            <label for="eaddress">Email Address<span>*</span></label>
-            <input id="eaddress" type="text"   name="email" />
+            <label for="email">Email Address<span>*</span></label>
+            <select name="email">
+            <option value="<?php echo $_SESSION['email'];?>" name="email" selected><?php echo $_SESSION['email']; ?></option>
+            </select>
           </div>
           <div class="item">
             <label for="phone">room_id<span>*</span></label>
-            <input id="phone" type="number"   name="room_id" min="0" placeholder="<?php echo $row['room_id'];?>"/>
+            <select name="room_id">
+            <option name="room_id" value="<?php echo $row['room_id'];?>" selected><?php echo $row['room_id'];?></option>
+            </select>
           </div>
       </fieldset>
       <br/>
@@ -342,18 +353,25 @@ $no_of_rooms= $_POST['room'];
       <div class="columns">
       <div class="item">
       <label for="date"><b>Check-in: </b>
-      <label for="checkindate">Check-in Date <span>*</span></label>
-      <input id="checkindate" type="text" name="checkindate" placeholder="<?php echo date("Y/m/d");?>" />
+      <label for="checkindate">Check-in Date <span>*    
+      </span></label>
+      <input id="checkindate" type="text" name="checkindate" placeholder="<?php echo date("Y/m/d");?>" required/>
       <i class="fas fa-calendar-alt"></i>
       </div>
       <div class="item">
-      <label for="checkoutdate">Check-out Date <span>*</span></label>
-      <input id="checkoutdate" type="text" name="checkoutdate" placeholder="<?php echo date( "Y/m/d", strtotime( "+1 days" ) ); ;?>"  />
+      <label for="checkoutdate">Check-out Date <span>*</span>
+    </label>
+      <input id="checkoutdate" type="text" name="checkoutdate" placeholder="<?php echo date( "Y/m/d", strtotime( "+1 days" ) );?>" required/>
       <i class="fas fa-calendar-alt"></i>
       </div>
        
       <div class="item" style=width:100%>
       <label for="room">Number of rooms</label>
+      <span>* 
+      <?php if(isset($err['room'])) {?>
+            <?php echo $err['room']; ?>
+         <?php };?>
+      </span>
       <input id="room" type="number" name="room" min="0" max="5"/>
       </div>
       
@@ -362,7 +380,6 @@ $no_of_rooms= $_POST['room'];
       </fieldset>
       <div class="btn-block">
       <button type="submit" name="submit" href="/">Submit</button>
-      <a href="view_status.php">View status</a>
       </div>
     </form>
     </div>
