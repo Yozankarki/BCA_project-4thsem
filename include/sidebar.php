@@ -9,14 +9,14 @@
                             </a>
                             
                  
-                            <a class="nav-link" href="profile.php">
+                            <a class="nav-link" href="booking_info.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-                                Profile
+                                Booking
                             </a>
 
-  <a class="nav-link" href="change-password.php">
+  <a class="nav-link" href="profile_update.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-key"></i></div>
-                               Change Password
+                               Edit Profile
                             </a>
 
                             <a class="nav-link" href="logout.php">
