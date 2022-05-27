@@ -39,12 +39,13 @@
               <i class="bi bi-x-lg"></i>
             </div>
             <li><a href="#">Home</a></li>
-            <li><a href="#About">About</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#Features">Features</a></li>
             <li><a href="#contact">Contact</a></li>
+            <li><a href="admin/index.php">Admin</a></li>
           </ul>
           <?php if(isset($_SESSION['email']) != "") {?>
+            
             <div class="signin">
             <h3 class="sign-in">
             <span><?php echo $_SESSION['email'];?></span> </h3>
@@ -95,7 +96,7 @@
    $pass = mysqli_real_escape_string($connection, $_POST["pass"]);
    $pass = md5($pass);
    
-   $query = "select email,password from users where email ='$email' and password = '$pass' ";
+   $query = "select email,password from users where email ='$email' and password = '$pass' and user_type ='user' ";
    
    $result = mysqli_query($connection, $query);
    if( mysqli_num_rows($result) == 1){

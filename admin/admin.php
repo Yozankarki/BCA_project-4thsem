@@ -1,9 +1,9 @@
-<?php session_start();
-include_once('include/databaseconn.php');
-if (!isset($_SESSION['email'])) {
-    header('location:index.php?msg=1');
-}
- else{   
+<?php session_start();  
+ 
+   $path = $_SERVER['DOCUMENT_ROOT'];
+   $path = "/PRoject_file/include/photos";
+   include_once($path);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -124,7 +124,7 @@ tr:hover {background-color: #ddd;}
                  <?php };?>
                  <?php } else {?> 
                     <tr>
-                        <td colspan="8">NO categories found in database</td>
+                        <td colspan="4">NO categories found in database</td>
                     </tr>
                     <?php };?>
              </tbody>
@@ -133,7 +133,6 @@ tr:hover {background-color: #ddd;}
 
                     </div>
                 </main>
-          <?php include('include/footer.php');?>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
@@ -142,7 +141,7 @@ tr:hover {background-color: #ddd;}
         <script src="assets/demo/chart-area-demo.js"></script>
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="js/datatables-simple-demo.js"></script>
+        <script src="datatables-simple-demo.js"></script>
     </body>
 </html>
-<?php } ?>
+

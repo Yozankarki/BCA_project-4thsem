@@ -1,10 +1,16 @@
 <?php session_start();
-include_once('include/databaseconn.php');
-if (!isset($_SESSION['email'])) {
-    header('location:index.php?msg=1');
-}
- else{   
+include_once('../include/databaseconn.php');
+if (strlen($_SESSION['adminid']==0)) {
+  header('location:include/logout.php');
+  } else{
+    if(isset($_GET['delete'])){
+        $id = $_GET['delete'];
+        mysqli_query($connection, "DELETE FROM room_booking_details WHERE id = $id");
+        echo '<script>window.location.assign = "room_booking_details.php";</script>';
+     };
+    
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -13,11 +19,10 @@ if (!isset($_SESSION['email'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Profile | Registration and Login System</title>
+        <title>Admin Dashboard | Registration and Login System </title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="styles.css" rel="stylesheet" />
+        <link href="../styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
         <style>
        table {
   border-collapse: collapse;
@@ -62,87 +67,81 @@ tr:hover {background-color: #ddd;}
     </style>
     </head>
     <body class="sb-nav-fixed">
-      <?php include_once('include/navbar.php');?>
+   <?php include_once('include/navbar.php');?>
         <div id="layoutSidenav">
           <?php include_once('include/sidebar.php');?>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        
+
 <?php 
+
  $email = $_SESSION['email'];
- $sql = "select * from room_booking_details where booked_by = '$email' order by booked_at desc ";
+ $sql = "select * from room_booking_details order by booked_at asc ";
  $result = $connection -> query($sql);
  $data =[];
  if($result -> num_rows > 0){
      while($row = $result -> fetch_assoc()){
          array_push($data, $row);
      }
- }?>
- <?php if (isset($_GET['msg']) && $_GET['msg'] == 1) {
-		echo "<script>alert('Select your room first.')</script>";
-	} 
+ }
+
+ ?>
+ <?php 
     if (isset($_GET['msg']) && $_GET['msg'] == 2) {
 		echo "<script>alert('category deleted successfully.')</script>";
 	} 
     if (isset($_GET['msg']) && $_GET['msg'] == 3) {
 		echo "<script>alert('category not deleted.')</script>";
-	} 
-    
-    
+	}  
     ?>
-    <h3>Your Booked Rooms Information</h3>
+                    <h3>Users Information</h3>
    <table>
          <thread>
              <tr>
                  <th>SN</th>
-                 <th>room_id</th>
-                 <th>checkin_date</th>
-                 <th>checkout_date</th>
-                 <th>N0_of_rooms</th>
-                 <th>booked_by</th>
-                 <th>booked_at</th>
+                 <th>Booked By</th>
+                 <th>Check In </th>
+                 <th>Check Out</th>
+                 <th>No Of Rooms</th>
+                 <th>Booked At</th>
                  <th>Action</th>
+                 
              </tr>
              <tbody>
                  <?php if(count($data) > 0) {?>
                     <?php foreach($data as $key => $record){?>
                  <tr>
-                     <td><?php echo  $key + 1;?></td>
-                     <td><?php echo $record['room_id'] ;?></td>
+                     <td><?php echo  $key + 1;?></td>   
+                     <td><?php echo $record['booked_by'] ;?></td>
                      <td><?php echo $record['checkin_date'] ;?></td>
                      <td><?php echo $record['checkout_date'] ;?></td>
                      <td><?php echo $record['N0_of_rooms'] ;?></td>
-                     <td><?php echo $record['booked_by'] ;?></td>
                      <td><?php echo $record['booked_at'] ;?></td>
                      <td class="action_column">
-                        <a href="view_details.php?id=<?php echo $record['room_id'];?>" class="view">View</a>
-                        <a href="cancel_booking.php?id=<?php echo $record['id'];?>"
-                        class="delete" onclick="return confirm('Are you sure to cancel Booking!');">cancel</a>
+                        <a href="room_booking_details.php?delete=<?php echo $record['room_id'];?>"
+                        class="delete" onclick="return confirm('Are you sure to cancel this booked room!');">cancel</a>
                      </td>
                  </tr>
                  <?php };?>
                  <?php } else {?> 
                     <tr>
-                        <td colspan="8">NO categories found in database</td>
+                        <td colspan="6">NO categories found in database</td>
                     </tr>
                     <?php };?>
              </tbody>
          </thread>
      </table>
-
                     </div>
                 </main>
-          <?php include('include/footer.php');?>
+             <?php include_once('../include/footer.php'); ?>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="scripts.js"></script>
+        <script src="../scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="js/datatables-simple-demo.js"></script>
+        <script src="../datatables-simple-demo.js"></script>
     </body>
 </html>
 <?php } ?>
