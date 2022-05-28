@@ -91,11 +91,10 @@ img{
  <div>
         <?php 
             if(!empty($row)){ ?>
+            <div class="gallery">
+             <img src="photos/<?php echo $row['image'] ;?>" alt="room image" width="50%" height="30%">
+            </div>
             <table>
-                <tr>
-                    <th>Room image</th>
-                    <td><img src="photos/<?php echo $row['image'] ;?>" alt="room image"></td>
-                </tr>
                 <tr>
                     <th>Room NO</th>
                     <td><?php echo $row['room_no'];?></td>

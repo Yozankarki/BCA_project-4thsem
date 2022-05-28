@@ -247,6 +247,9 @@
     </style>
 </head>
 <body>
+<div class="btn-block">
+      <button name="submit"><a  href="index.php" style="color: white;">Go Back!</a></button>
+      </div>
 <?php
  if(isset($_POST['submit'])){
    $err = [];
@@ -371,7 +374,7 @@ booked_by = '$booked_by' ";
             <?php echo $err['room']; ?>
          <?php };?>
       </span>
-      <input id="room" type="number" name="room" min="0" max="5"/>
+      <input id="room" type="number" name="room" min="0" max="10"/>
       </div>
       
     </div>
