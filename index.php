@@ -385,19 +385,20 @@ function test_input($data) {
 
     <div class="gird-row-2">
         <!--This is for two images-->
+        <?php
+          $sql = mysqli_query($connection, 'select details,image from front_page ');
+          while($row = mysqli_fetch_assoc($sql))
+          {
+        ?>
 <div class="gallery" id="apartment">
-    <img src="photos/room1.jpg" alt="image_loading">
+    <img src="photos/<?php echo $row['image'];?>" alt="image_loading">
       <div class="img_text">
-       <p></p>
+       <p><?php echo $row['details'] ;?></p>
+       <button class="img_button"><a href="rooms.php">Explore More</a></button>
       </div>
   </div>
+  <?php }?>
 
-  <div class="gallery">
-     <img src="photos/bouddha.jpg" alt="image_loading">
-      <div class="img_text">
-        <p>Add a description of the image here</p>
-      </div>
-  </div>
     </div>
     
     <div class="gird-row-3">
@@ -405,7 +406,7 @@ function test_input($data) {
     <div class="explore">
         <div class="explore_center">
           <h1>Explore More</h1>
-          <button><a href="rooms.php" >Near Available Rooms</a></button>
+          <button class="img_button"><a href="rooms.php">Near Available Rooms</a></button>
         </div> 
        </div>
     </div>
@@ -463,7 +464,7 @@ function test_input($data) {
  <h2>Featured Destinations</h2>
  <div class="Featured_dest">
   <img class="feature" src="photos/nature.jpg" alt="Resort_image" width="800" height="400">
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet...
+ <p><span>GuideAL</span> offers 500 guest rooms and suites with beautiful views and spacious quarters. Stay in the Preferred Club Two-Bedroom Villa, ideal for families who want to be steps from the water park, lazy river, Explorer's Club for Kids and Core Zone for Teens. Or try one of our spacious Junior suites, with beautiful views of the garden, pool or ocean and easy access to our gourmet restaurants and bars. Each room is equipped with the all-inclusive amenities of Unlimited-Luxury. Calming neutral tones are accented by deep teals and blues with hints of the tropical island throughout.</p>
  </div>
     </div>
 

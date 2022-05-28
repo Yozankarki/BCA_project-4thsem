@@ -104,47 +104,6 @@
                         
                      </section>
                  </div>
-                 
-
-                 <div class="col-2">
-                     <!-- blog -->
-                     <section>
-                         <header class="major">
-                             <h2>The Blog</h2>
-                         </header>
-                         <div class="row">
-                             <div class="col-3">
-                                 <section class="box">
-                                     <a href="#" class="image featured left"><img src="photos/room5.jpg" alt="room"></a>
-                                     <header>
-                                         <h3>kathmandu Durbar Square</h3>
-                                     </header>
-                                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, dolore minus, autem doloremque, impedit ab itaque dignissimos officia quis perferendis eaque aperiam molestias omnis ducimus laborum labore optio odio magni.</p>
-                                     <footer>
-                                         <ul class="actions">
-                                             <li><a href="#" class="button alt large">Continue Reading.</a></li>
-                                         </ul>
-                                     </footer>
-                                 </section>
-                             </div>
-
-                             <div class="col-3">
-                                <section class="box">
-                                    <a href="#" class="image featured left"><img src="photos/room5.jpg" alt="room"></a>
-                                    <header>
-                                        <h3>kathmandu Durbar Square</h3>
-                                    </header>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, dolore minus, autem doloremque, impedit ab itaque dignissimos officia quis perferendis eaque aperiam molestias omnis ducimus laborum labore optio odio magni.</p>
-                                    <footer>
-                                        <ul class="actions">
-                                            <li><a href="#" class="button alt large">Continue Reading.</a></li>
-                                        </ul>
-                                    </footer>
-                                </section>
-                            </div>  
-                         </div>
-                     </section>
-                 </div>  
                </div>
            </div>
        </section>

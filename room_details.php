@@ -24,6 +24,24 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="rooms.css">
     <title>GuideAl rooms</title>
+    <style>
+        table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #777}
+
+th {
+  background-color: #04AA6D;
+  color: white;
+}
+    </style>
 </head>
 <body>
     <div class="page-wrapper">
@@ -40,14 +58,13 @@
             </ul>  
           </nav>
       </section>
-      <div>
+      <div class="container">
         <?php 
             if(!empty($row)){ ?>
-            <table>
-                <tr>
-                    <th>Image</th>
-                    <td><img src="photos/<?php echo $row['image']; ?>" alt="ROOMS1" width="50%" height="auto"></td>
-                </tr>
+            <div class="gallery">
+                <img src="photos/<?php echo $row['image']; ?>"alt="ROOMS1" width="100%" height="auto">
+            </div>
+        <table>              
                 <tr>
                     <th>Room type</th>
                     <td><?php echo $row['type'];?></td>
@@ -71,7 +88,7 @@
                    Invalid category.
                </div>
            <?php }  ?> 
-           <a href="book_now.php?room_id=<?php echo $row['room_id']; ?>">BOOK NOW</a>
+           <button style="margin-top: 5px;"><a href="book_now.php?room_id=<?php echo $row['room_id']; ?>">BOOK NOW</a></button>
      </div>
        
      <?php include_once('include/footer.php');?>
