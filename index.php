@@ -388,9 +388,10 @@ function test_input($data) {
 <div class="gallery" id="apartment">
     <img src="photos/room1.jpg" alt="image_loading">
       <div class="img_text">
-       <p><span>GuideAL</span> offers 500 guest rooms and suites with beautiful views and spacious quarters. Stay in the Preferred Club Two-Bedroom Villa, ideal for families who want to be steps from the water park, lazy river, Explorer's Club for Kids and Core Zone for Teens. Or try one of our spacious Junior suites, with beautiful views of the garden, pool or ocean and easy access to our gourmet restaurants and bars. Each room is equipped with the all-inclusive amenities of Unlimited-Luxury. Calming neutral tones are accented by deep teals and blues with hints of the tropical island throughout.</p>
+       <p></p>
       </div>
   </div>
+
   <div class="gallery">
      <img src="photos/bouddha.jpg" alt="image_loading">
       <div class="img_text">
@@ -398,65 +399,13 @@ function test_input($data) {
       </div>
   </div>
     </div>
-
-    <div class="wrapper top" id="services">
-      <div class="container-amenties">
-        <div class="text">
-          <h2>Our Amenities</h2>
-          <p>We have tried to include all the facilities that our customers require during their stays in our partner hotels and apartments so this are some of our main services that we provide along with our rooms and packages.  </p>
-  
-          <div class="content2">
-            <div class="box-flex">
-              <i class="fas fa-swimming-pool"></i>
-              <span>Swimming pool</span>
-            </div>
-            <div class="box-flex">
-              <i class="fas fa-dumbbell"></i>
-              <span>Gym & yogaa</span>
-            </div>
-            <div class="box-flex">
-              <i class="fas fa-ship"></i>
-              <span>Boat Tours</span>
-            </div>
-            <div class="box-flex">
-              <i class="fas fa-swimmer"></i>
-              <span>Surfing Lessons</span>
-            </div>
-            <div class="box-flex">
-              <i class="fas fa-microphone"></i>
-              <span>Conference room</span>
-            </div>
-            <div class="box-flex">
-              <i class="fas fa-water"></i>
-              <span>Diving & smorking</span>
-            </div>
-            <div class="box-flex">
-              <i class="fas fa-umbrella-beach"></i>
-              <span>Private Beach</span>
-            </div>
-            <div class="box-flex">
-              <i class="fas fa-wifi"></i>
-              <span>Free wifi</span>
-            </div>
-            <div class="box-flex">
-              <i class="fas fa-charging-station"></i>
-              <span>Electric vehicle charging</span>
-            </div>
-            <div class="box-flex">
-              <i class="fas fa-spa"></i>
-              <span>Spa</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    
     <div class="gird-row-3">
         <!--This is for Near available rooms-->
     <div class="explore">
         <div class="explore_center">
           <h1>Explore More</h1>
-          <button><a href="rooms.php">Near Available Rooms</a></button>
+          <button><a href="rooms.php" >Near Available Rooms</a></button>
         </div> 
        </div>
     </div>

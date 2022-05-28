@@ -24,12 +24,14 @@
  /* this is code for grid element  */
 .header
 {
-    grid-area: Header;
-    background: url("photos/room3.jpg") no-repeat;
-    height: 100vh;
-    background-size: 100% 100%;
-    background-position: center;
-    background-attachment: fixed;
+    grid-area: Header;  
+}
+.banner{
+  background: url("photos/room9.jpg") no-repeat;
+  height: 100vh;
+  background-size: 100% 100%;
+  background-position: center;
+  background-attachment: fixed;
 }
 .content{
     max-width: 1250px;
@@ -150,6 +152,7 @@
       font-size: 27px;
     }
   }
+
 /* This is for sign-in button */
 .sign-in
 {
@@ -578,43 +581,6 @@ div.gallery:hover
         height: auto;
         display: block;
     }
-}
-/* this is for amenties */
-.content2 {
-  display: flex;
-  justify-content: space-between;
-  background-color: transparent;
-  
-}
-
-.content2 > div {
-  background-color: transparent;
-  width: 100%;
-  margin: 30px;
-  text-align: center;
-  line-height: 50px;
-  font-size: 30px;
-}
-.box-flex > span
-{
-  font-size: 20px;
-  display: block;
-}
-.text > h2
-{
-  font-weight: 400px;
-  text-align: center;
-  text-transform: uppercase;
-}
-.text p
-{
-  font-size: 20px;
-}
-@media screen and (max-width:850px){
-  .content2 > div
-  {
-    flex: 100%;
-  }
 }
 
  /* This is for near available rooms */

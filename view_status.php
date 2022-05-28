@@ -1,4 +1,3 @@
-
 <?php 
   require_once 'include/databaseconn.php';
   $sql = "select * from room_booking_details  order by checkin_date desc ";

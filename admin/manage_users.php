@@ -15,9 +15,9 @@ if (strlen($_SESSION['adminid']==0)) {
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Admin Dashboard | Registration and Login System </title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        
         <link href="../styles.css" rel="stylesheet" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        
         <style>
        table {
   border-collapse: collapse;
@@ -110,7 +110,7 @@ tr:hover {background-color: #ddd;}
                      <td><?php echo $record['created_at'] ;?></td>
                      <td class="action_column">
                         
-                        <a href="cancel_booking.php?id=<?php echo $record['id'];?>"
+                        <a href="delete_user.php?delete=<?php echo $record['id'];?>"
                         class="delete" onclick="return confirm('Are you sure to delete this user!');">delete</a>
                      </td>
                  </tr>
@@ -130,8 +130,6 @@ tr:hover {background-color: #ddd;}
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="../datatables-simple-demo.js"></script>
     </body>
 </html>
