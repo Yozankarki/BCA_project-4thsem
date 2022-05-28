@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 25, 2022 at 02:56 PM
+-- Generation Time: May 28, 2022 at 08:37 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -45,7 +45,8 @@ INSERT INTO `rooms` (`room_id`, `room_no`, `type`, `price`, `details`, `image`, 
 (1, '100', 'Deluxe rooms', '2000', 'The Contemporary yet simple designed King bedded rooms are well equipped with modern amenities. Refresh your mind with our best suites for you.\r\n', 'room1.jpg', 'kathmandu'),
 (2, '200', 'Standard room.', '1500', 'Simple design king bedded room are well equipped with modern amenities.', 'room2.jpg', 'bhaktapur'),
 (3, '300', 'twin Deluxe room', '2000', 'Double bedded rooms with good hospitality and awesome sweets feel like home.', 'room3.jpg', 'lalitpur'),
-(4, '400', 'Suite', '1000', 'Single bed suite for single person to live on and stay for one night.', 'room4.jpg', 'kathmandu');
+(4, '400', 'deluxe suite', '1500', 'Feel like home with great Hospitality and local newari foods.', 'room4.jpg', 'Bhaktapur'),
+(49, '500', 'deluxe package', '1500', 'all working', 'food-1.png', 'bhaktapur');
 
 -- --------------------------------------------------------
 
@@ -68,8 +69,7 @@ CREATE TABLE `room_booking_details` (
 --
 
 INSERT INTO `room_booking_details` (`id`, `room_id`, `checkin_date`, `checkout_date`, `N0_of_rooms`, `booked_by`, `booked_at`) VALUES
-(44, 1, '05/26/2022', '05/29/2022', 2, 'yojan@example.com', '2022-05-25 09:06:53'),
-(46, 4, '05/26/2022', '05/28/2022', 2, 'ram@gmail.com', '2022-05-25 18:23:21');
+(44, 1, '05/26/2022', '05/29/2022', 2, 'yojan@example.com', '2022-05-25 09:06:53');
 
 -- --------------------------------------------------------
 
@@ -93,7 +93,6 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `user_type`, `created_at`) VALUES
 (1, 'yojan karki', 'yojan@example.com', '3ccaf608b876597950083fb483bc590d', 'admin', '2022-05-20 08:27:00'),
 (3, 'ram', 'ram@gmail.com', 'c9a2c96cd599eca3ba0a2e2a471043e3', 'user', '2022-05-20 18:13:09'),
-(4, 'shyam', 'shyam@gmail.com', 'cffba1722dd649bd7a72a37e48358b0f', 'user', '2022-05-20 18:35:04'),
 (10, 'hari bahadur', 'hari@gmail.com', 'df863316b42f6c369a042952f2e0e39a', 'user', '2022-05-25 12:54:29');
 
 --
@@ -128,7 +127,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `room_booking_details`
