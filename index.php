@@ -50,7 +50,7 @@
             <h3 class="sign-in">
             <span><?php echo $_SESSION['email'];?></span> </h3>
               <div id="myDropdown" class="dropdown-content">
-             <a href="profile.php">Booking</a>
+             <a href="welcome.php">Booking</a>
              <a href="logout.php">logout</a>
           </div> 
           </div>
