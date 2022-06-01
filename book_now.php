@@ -32,10 +32,13 @@
   <script>
   $( function() {
     $( "#checkindate" ).datepicker({ minDate: -0, maxDate: "+30D" });
-    $( "#checkoutdate" ).datepicker({ minDate:+1, maxDate: "+30D" })
+    $( "#checkoutdate" ).datepicker({ minDate:+1, maxDate: "+30D" });
+    $.datepicker.setDefaults({ dateFormat: 'yy/mm/dd' });
+//Later..
+$('.datepicker').datepicker();
   } );
   </script>
-   
+ 
     <link rel="stylesheet" href="rooms.css">
     <title>Hotel Reservation Form</title>
     <style>
